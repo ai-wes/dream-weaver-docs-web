@@ -23,164 +23,46 @@ export function DocsSidebar() {
   const pathname = usePathname()
 
   const isActive = (path: string) => {
-    return pathname === path
+    // Allow matching parent paths for collapsible sections
+    return pathname === path || pathname.startsWith(path + "/")
   }
+
+  // Helper function to create menu items, reducing repetition
+  const createMenuItem = (href: string, title: string) => (
+    <SidebarMenuItem key={href}>
+      <SidebarMenuButton asChild isActive={pathname === href}>
+        <Link href={href}>{title}</Link>
+      </SidebarMenuButton>
+    </SidebarMenuItem>
+  )
+
+  // Helper function to create sub-menu items
+  const createSubMenuItem = (href: string, title: string) => (
+    <SidebarMenuSubItem key={href}>
+      <SidebarMenuSubButton asChild isActive={pathname === href}>
+        <Link href={href}>{title}</Link>
+      </SidebarMenuSubButton>
+    </SidebarMenuSubItem>
+  )
 
   return (
     <Sidebar className="sidebar" collapsible="icon">
       <SidebarContent>
-        {/* Introduction Section */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-blue-300">Introduction</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/introduction/executive-summary")}>
-                  <Link href="/introduction/executive-summary">Executive Summary</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/introduction/project-overview")}>
-                  <Link href="/introduction/project-overview">Project Overview</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/introduction/vision")}>
-                  <Link href="/introduction/vision">The Vision</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/introduction/problem-opportunity")}>
-                  <Link href="/introduction/problem-opportunity">Problem & Opportunity</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/introduction/target-audience")}>
-                  <Link href="/introduction/target-audience">Target Audience</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/introduction/target-audience-detailed")}>
-                  <Link href="/introduction/target-audience-detailed">Who Is DreamWeaver For?</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarSeparator />
-
-        {/* Core Innovation Section */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-blue-300">Core Innovation: AI x Blockchain</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/core-innovation/dream-weaver-concept")}>
-                  <Link href="/core-innovation/dream-weaver-concept">The Dream Weaver Concept</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/core-innovation/ai-powered-evolution")}>
-                  <Link href="/core-innovation/ai-powered-evolution">AI-Powered Evolution</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/core-innovation/blockchain-significance")}>
-                  <Link href="/core-innovation/blockchain-significance">Blockchain Significance</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/core-innovation/emergence-as-feature")}>
-                  <Link href="/core-innovation/emergence-as-feature">Emergence as a Feature</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarSeparator />
-
-        {/* Dream Weaver Experience Section */}
-        <Collapsible defaultOpen className="group/collapsible">
+        {/* --- 0. Project Overview --- */}
+        <Collapsible defaultOpen={isActive("/project-overview")} className="group/collapsible">
           <SidebarGroupLabel asChild>
             <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
-              The Dream Weaver Experience
+              0. Project Overview
               <ChevronDown className="chevron-rotate" />
             </CollapsibleTrigger>
           </SidebarGroupLabel>
           <CollapsibleContent>
             <SidebarGroupContent>
               <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild isActive={isActive("/dream-weaver-experience/gameplay-loop")}>
-                    <Link href="/dream-weaver-experience/gameplay-loop">Gameplay Loop Overview</Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-
-                <Collapsible className="group/collapsible">
-                  <SidebarMenuItem>
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuButton>
-                        Core Gameplay Mechanics
-                        <ChevronDown className="chevron-rotate" />
-                      </SidebarMenuButton>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        <SidebarMenuSubItem>
-                          <SidebarMenuSubButton
-                            asChild
-                            isActive={isActive("/dream-weaver-experience/core-mechanics/dream-realms")}
-                          >
-                            <Link href="/dream-weaver-experience/core-mechanics/dream-realms">
-                              Exploring Dream Realms & Nodes
-                            </Link>
-                          </SidebarMenuSubButton>
-                        </SidebarMenuSubItem>
-                        <SidebarMenuSubItem>
-                          <SidebarMenuSubButton
-                            asChild
-                            isActive={isActive("/dream-weaver-experience/core-mechanics/wisp-capturing")}
-                          >
-                            <Link href="/dream-weaver-experience/core-mechanics/wisp-capturing">
-                              Wisp Capturing & AR Integration
-                            </Link>
-                          </SidebarMenuSubButton>
-                        </SidebarMenuSubItem>
-                        <SidebarMenuSubItem>
-                          <SidebarMenuSubButton
-                            asChild
-                            isActive={isActive("/dream-weaver-experience/core-mechanics/battle-system")}
-                          >
-                            <Link href="/dream-weaver-experience/core-mechanics/battle-system">
-                              Battle System Fundamentals
-                            </Link>
-                          </SidebarMenuSubButton>
-                        </SidebarMenuSubItem>
-                        <SidebarMenuSubItem>
-                          <SidebarMenuSubButton
-                            asChild
-                            isActive={isActive("/dream-weaver-experience/core-mechanics/dream-rune")}
-                          >
-                            <Link href="/dream-weaver-experience/core-mechanics/dream-rune">Dream Rune System</Link>
-                          </SidebarMenuSubButton>
-                        </SidebarMenuSubItem>
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  </SidebarMenuItem>
-                </Collapsible>
-
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild isActive={isActive("/dream-weaver-experience/player-progression")}>
-                    <Link href="/dream-weaver-experience/player-progression">Player Progression</Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild isActive={isActive("/dream-weaver-experience/social-creative")}>
-                    <Link href="/dream-weaver-experience/social-creative">Social & Creative Aspects</Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                {createMenuItem("/project-overview/intro", "0.1 Intro")}
+                {createMenuItem("/project-overview/ecosystem", "0.2 Ecosystem Review")}
+                {createMenuItem("/project-overview/audience", "0.3 Audience")}
+                {createMenuItem("/project-overview/why", "Why DreamWeaver?")}
               </SidebarMenu>
             </SidebarGroupContent>
           </CollapsibleContent>
@@ -188,472 +70,153 @@ export function DocsSidebar() {
 
         <SidebarSeparator />
 
-        <SidebarGroup>
-          <Collapsible defaultOpen className="group/collapsible">
-            <SidebarGroupLabel asChild>
-              <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
-                The Engine: AI & Narrative Systems
-                <ChevronDown className="chevron-rotate" />
-              </CollapsibleTrigger>
-            </SidebarGroupLabel>
-            <CollapsibleContent>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <Collapsible className="group/collapsible">
-                    <SidebarMenuItem>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>
-                          The Dream Oracle
-                          <ChevronDown className="chevron-rotate" />
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/engine/dream-oracle/role")}>
-                              <Link href="/engine/dream-oracle/role">Role: Dream Interpretation & Personalization</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/engine/dream-oracle/ai-workflow")}>
-                              <Link href="/engine/dream-oracle/ai-workflow">Conceptual AI Workflow</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/engine/dream-oracle/impact")}>
-                              <Link href="/engine/dream-oracle/impact">Impact on NFTs & Gameplay</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </SidebarMenuItem>
-                  </Collapsible>
-
-                  <Collapsible className="group/collapsible">
-                    <SidebarMenuItem>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>
-                          The Dreamweaver Graph
-                          <ChevronDown className="chevron-rotate" />
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/engine/dreamweaver-graph/role")}>
-                              <Link href="/engine/dreamweaver-graph/role">Role: Mapping Collective Consciousness</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/engine/dreamweaver-graph/structure")}>
-                              <Link href="/engine/dreamweaver-graph/structure">Knowledge Graph Structure</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/engine/dreamweaver-graph/dynamics")}>
-                              <Link href="/engine/dreamweaver-graph/dynamics">
-                                Real-time Dynamics & Narrative Influence
-                              </Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </SidebarMenuItem>
-                  </Collapsible>
-
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/engine/dwidea")}>
-                      <Link href="/engine/dwidea">DWIDEA (AI Marketing/Narrative Agents)</Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </CollapsibleContent>
-          </Collapsible>
-        </SidebarGroup>
+        {/* --- 1. The DreamWeaver (AI Core) --- */}
+        <Collapsible defaultOpen={isActive("/dream-weaver-ai")} className="group/collapsible">
+          <SidebarGroupLabel asChild>
+            <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
+              1. The DreamWeaver AI
+              <ChevronDown className="chevron-rotate" />
+            </CollapsibleTrigger>
+          </SidebarGroupLabel>
+          <CollapsibleContent>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {createMenuItem("/dream-weaver-ai/graph-overview", "1.1a Graph Overview")}
+                {createMenuItem("/dream-weaver-ai/graph-deepdive", "1.1b Graph Deepdive")}
+                {createMenuItem("/dream-weaver-ai/dream-oracle", "1.2 Dream Oracle")}
+                {createMenuItem("/dream-weaver-ai/nodes-ownership", "1.3 Nodes & Ownership")}
+                {/* Assuming 4_ar_dream_nodes.md is covered by 1.3 or AR section */}
+                {createMenuItem("/dream-weaver-ai/milestones", "Milestones")}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </CollapsibleContent>
+        </Collapsible>
 
         <SidebarSeparator />
 
-        <SidebarGroup>
-          <Collapsible defaultOpen className="group/collapsible">
-            <SidebarGroupLabel asChild>
-              <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
-                The Foundation: DreamSoul NFT & Identity
-                <ChevronDown className="chevron-rotate" />
-              </CollapsibleTrigger>
-            </SidebarGroupLabel>
-            <CollapsibleContent>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/foundation/lucid-core")}>
-                      <Link href="/foundation/lucid-core">The Lucid Core</Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-
-                  <Collapsible className="group/collapsible">
-                    <SidebarMenuItem>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>
-                          The DreamSoul NFT
-                          <ChevronDown className="chevron-rotate" />
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={isActive("/foundation/dreamsoul/evolving-identity")}
-                            >
-                              <Link href="/foundation/dreamsoul/evolving-identity">An Evolving Digital Identity</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/foundation/dreamsoul/dynamic-metadata")}>
-                              <Link href="/foundation/dreamsoul/dynamic-metadata">Dynamic Metadata Explained</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/foundation/dreamsoul/visual-evolution")}>
-                              <Link href="/foundation/dreamsoul/visual-evolution">Visual Evolution Process</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </SidebarMenuItem>
-                  </Collapsible>
-
-                  <Collapsible className="group/collapsible">
-                    <SidebarMenuItem>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>
-                          Upgrade & Evolution Mechanics
-                          <ChevronDown className="chevron-rotate" />
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/foundation/upgrade/fragment-fusion")}>
-                              <Link href="/foundation/upgrade/fragment-fusion">Fragment Fusion System</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/foundation/upgrade/time-token")}>
-                              <Link href="/foundation/upgrade/time-token">Time Token Utility</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/foundation/upgrade/progression-paths")}>
-                              <Link href="/foundation/upgrade/progression-paths">Challenges & Progression Paths</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </SidebarMenuItem>
-                  </Collapsible>
-
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/foundation/marketplace")}>
-                      <Link href="/foundation/marketplace">Marketplace Overview</Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </CollapsibleContent>
-          </Collapsible>
-        </SidebarGroup>
+        {/* --- 2. The Dream Soul & Lucid Core --- */}
+        <Collapsible defaultOpen={isActive("/dreamsoul")} className="group/collapsible">
+          <SidebarGroupLabel asChild>
+            <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
+              2. DreamSoul & Identity
+              <ChevronDown className="chevron-rotate" />
+            </CollapsibleTrigger>
+          </SidebarGroupLabel>
+          <CollapsibleContent>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {createMenuItem("/dreamsoul/overview", "2.0 Overview")}
+                {createMenuItem("/dreamsoul/identity", "2.1 Living Identity")}
+                {createMenuItem("/dreamsoul/ai-entity", "2.2 AI Entity")}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </CollapsibleContent>
+        </Collapsible>
 
         <SidebarSeparator />
 
-        <SidebarGroup>
-          <Collapsible defaultOpen className="group/collapsible">
-            <SidebarGroupLabel asChild>
-              <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
-                Ecosystem & Sustainability
-                <ChevronDown className="chevron-rotate" />
-              </CollapsibleTrigger>
-            </SidebarGroupLabel>
-            <CollapsibleContent>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <Collapsible className="group/collapsible">
-                    <SidebarMenuItem>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>
-                          Tokenomics
-                          <ChevronDown className="chevron-rotate" />
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={isActive("/ecosystem-sustainability/tokenomics/dream-token")}
-                            >
-                              <Link href="/ecosystem-sustainability/tokenomics/dream-token">$DREAM Token</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={isActive("/ecosystem-sustainability/tokenomics/fragments")}
-                            >
-                              <Link href="/ecosystem-sustainability/tokenomics/fragments">Fragments of Lucidity</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={isActive("/ecosystem-sustainability/tokenomics/time-tokens")}
-                            >
-                              <Link href="/ecosystem-sustainability/tokenomics/time-tokens">Time Tokens</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={isActive("/ecosystem-sustainability/tokenomics/value-flow")}
-                            >
-                              <Link href="/ecosystem-sustainability/tokenomics/value-flow">
-                                Value Flow & Economic Model
-                              </Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={isActive("/ecosystem-sustainability/tokenomics/sustainability")}
-                            >
-                              <Link href="/ecosystem-sustainability/tokenomics/sustainability">
-                                Sustainability Plan
-                              </Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </SidebarMenuItem>
-                  </Collapsible>
-
-                  <Collapsible className="group/collapsible">
-                    <SidebarMenuItem>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>
-                          Polygon Alignment & Benefits
-                          <ChevronDown className="chevron-rotate" />
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={isActive("/ecosystem-sustainability/polygon/why-polygon")}
-                            >
-                              <Link href="/ecosystem-sustainability/polygon/why-polygon">Why Polygon?</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={isActive("/ecosystem-sustainability/polygon/technical-integration")}
-                            >
-                              <Link href="/ecosystem-sustainability/polygon/technical-integration">
-                                Technical Integration Details
-                              </Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={isActive("/ecosystem-sustainability/polygon/contribution")}
-                            >
-                              <Link href="/ecosystem-sustainability/polygon/contribution">
-                                Contribution to the Polygon Ecosystem
-                              </Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </SidebarMenuItem>
-                  </Collapsible>
-
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/ecosystem-sustainability/governance")}>
-                      <Link href="/ecosystem-sustainability/governance">Governance Model</Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </CollapsibleContent>
-          </Collapsible>
-        </SidebarGroup>
+        {/* --- 3. Immersive Gameplay --- */}
+        <Collapsible defaultOpen={isActive("/gameplay")} className="group/collapsible">
+          <SidebarGroupLabel asChild>
+            <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
+              3. Gameplay
+              <ChevronDown className="chevron-rotate" />
+            </CollapsibleTrigger>
+          </SidebarGroupLabel>
+          <CollapsibleContent>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {createMenuItem("/gameplay/loop", "4.1 Core Loop & Progression")}
+                {createMenuItem("/gameplay/wisps", "4.2 Wisps")}
+                {/* Maybe combine 5_wisps...md content here? */}
+                {createMenuItem("/gameplay/runes", "4.3 Dream Runes")}
+                {createMenuItem("/gameplay/combat", "4.4 Combat System")}
+                {createMenuItem("/gameplay/ar", "4.5 AR Integration")}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </CollapsibleContent>
+        </Collapsible>
 
         <SidebarSeparator />
 
-        <SidebarGroup>
-          <Collapsible defaultOpen className="group/collapsible">
-            <SidebarGroupLabel asChild>
-              <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
-                Execution Plan
-                <ChevronDown className="chevron-rotate" />
-              </CollapsibleTrigger>
-            </SidebarGroupLabel>
-            <CollapsibleContent>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/execution-plan/team")}>
-                      <Link href="/execution-plan/team">The Team</Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-
-                  <Collapsible className="group/collapsible">
-                    <SidebarMenuItem>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>
-                          Project Roadmap & Milestones
-                          <ChevronDown className="chevron-rotate" />
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/execution-plan/roadmap/phase-1")}>
-                              <Link href="/execution-plan/roadmap/phase-1">Phase 1: Genesis</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/execution-plan/roadmap/phase-2")}>
-                              <Link href="/execution-plan/roadmap/phase-2">Phase 2: Expansion</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/execution-plan/roadmap/phase-3")}>
-                              <Link href="/execution-plan/roadmap/phase-3">Phase 3: Evolution</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/execution-plan/roadmap/future-vision")}>
-                              <Link href="/execution-plan/roadmap/future-vision">Future Vision</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </SidebarMenuItem>
-                  </Collapsible>
-
-                  <Collapsible className="group/collapsible">
-                    <SidebarMenuItem>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>
-                          Budget & Resource Allocation
-                          <ChevronDown className="chevron-rotate" />
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/execution-plan/budget/total-request")}>
-                              <Link href="/execution-plan/budget/total-request">Total Grant Request Amount</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/execution-plan/budget/breakdown")}>
-                              <Link href="/execution-plan/budget/breakdown">Detailed Breakdown</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuSubButton asChild isActive={isActive("/execution-plan/budget/justification")}>
-                              <Link href="/execution-plan/budget/justification">Justification of Funds</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </SidebarMenuItem>
-                  </Collapsible>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </CollapsibleContent>
-          </Collapsible>
-        </SidebarGroup>
+        {/* --- 4. Blockchain & Polygon --- */}
+        <Collapsible defaultOpen={isActive("/blockchain")} className="group/collapsible">
+          <SidebarGroupLabel asChild>
+            <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
+              4. Blockchain & Polygon
+              <ChevronDown className="chevron-rotate" />
+            </CollapsibleTrigger>
+          </SidebarGroupLabel>
+          <CollapsibleContent>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {createMenuItem("/blockchain/overview", "Overview")}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </CollapsibleContent>
+        </Collapsible>
 
         <SidebarSeparator />
 
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-blue-300">Impact & Measurement</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/impact-measurement/success-metrics")}>
-                  <Link href="/impact-measurement/success-metrics">Success Metrics</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/impact-measurement/potential-impact")}>
-                  <Link href="/impact-measurement/potential-impact">Potential Impact</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {/* --- 5. Architecture Deepdive --- */}
+        <Collapsible defaultOpen={isActive("/architecture")} className="group/collapsible">
+          <SidebarGroupLabel asChild>
+            <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
+              5. Architecture
+              <ChevronDown className="chevron-rotate" />
+            </CollapsibleTrigger>
+          </SidebarGroupLabel>
+          <CollapsibleContent>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {createMenuItem("/architecture/ai-systems", "AI Systems")}
+                {createMenuItem("/architecture/example-flow", "Example Flow")}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </CollapsibleContent>
+        </Collapsible>
 
         <SidebarSeparator />
 
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-blue-300">Supporting Materials</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/supporting-materials/whitepaper")}>
-                  <Link href="/supporting-materials/whitepaper">Link to Whitepaper</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/supporting-materials/landing-page")}>
-                  <Link href="/supporting-materials/landing-page">Link to Landing Page</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/supporting-materials/demo")}>
-                  <Link href="/supporting-materials/demo">Link to Demo / Prototype</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/supporting-materials/technical-docs")}>
-                  <Link href="/supporting-materials/technical-docs">Link to Technical Documentation</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/supporting-materials/pitch-deck")}>
-                  <Link href="/supporting-materials/pitch-deck">Link to Pitch Deck</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {/* --- 6. Roadmap & Team --- */}
+        <Collapsible defaultOpen={isActive("/roadmap")} className="group/collapsible">
+          <SidebarGroupLabel asChild>
+            <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
+              6. Roadmap & Team
+              <ChevronDown className="chevron-rotate" />
+            </CollapsibleTrigger>
+          </SidebarGroupLabel>
+          <CollapsibleContent>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {createMenuItem("/roadmap/team", "6.0 Team")}
+                {createMenuItem("/roadmap/detailed", "6.1 Roadmap")}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </CollapsibleContent>
+        </Collapsible>
 
         <SidebarSeparator />
 
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-blue-300">Contact & Community</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/contact-community/partnership-inquiries")}>
-                  <Link href="/contact-community/partnership-inquiries">Partnership Inquiries</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/contact-community/join-community")}>
-                  <Link href="/contact-community/join-community">Join Discord / Twitter / Telegram</Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {/* --- 7. Appendices --- */}
+        <Collapsible defaultOpen={isActive("/appendices")} className="group/collapsible">
+          <SidebarGroupLabel asChild>
+            <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
+              7. Appendices
+              <ChevronDown className="chevron-rotate" />
+            </CollapsibleTrigger>
+          </SidebarGroupLabel>
+          <CollapsibleContent>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {createMenuItem("/appendices/diagrams", "Architecture Diagrams")}
+                {createMenuItem("/appendices/contracts", "Contracts")}
+                {/* Add link for code examples if needed */}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </CollapsibleContent>
+        </Collapsible>
+
       </SidebarContent>
     </Sidebar>
   )
