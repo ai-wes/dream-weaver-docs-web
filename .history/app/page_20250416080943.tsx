@@ -118,16 +118,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* AI Infrastructure Diagram Section */}
-      <div className="container mx-auto px-4 py-8 flex flex-col items-center">
-        <img
-          src="/images/ai-infrastructure.png"
-          alt="AI Infrastructure Overview"
-          className="w-full max-w-4xl rounded-lg shadow-lg border border-blue-900/40 bg-background/80 backdrop-blur-sm"
-        />
-        <p className="mt-4 text-center text-blue-200 text-lg font-semibold">AI Infrastructure Overview</p>
-      </div>
-
       {/* Quick Links Section Removed */}
 
       {/* Content Section */}
