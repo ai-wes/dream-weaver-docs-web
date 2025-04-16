@@ -20,6 +20,8 @@ graph TD
 
 ## AI Architecture
 
+![AI Infrastructure](ai-infrastructure.png)
+
 ```mermaid
 graph TD
     Input[User Input] --> NLP[NLP Processing]
@@ -37,6 +39,8 @@ graph TD
 
 ## Blockchain Architecture
 
+![Blockchain Contracts Architecture](blockchain_contracts_charts.png)
+
 ```mermaid
 graph TD
     User[User Wallet] --> Contracts[Smart Contracts]
@@ -52,6 +56,8 @@ graph TD
 ```
 
 ## AR Integration
+
+![AR Infrastructure](ar-infrastructure.png)
 
 ```mermaid
 graph TD
@@ -69,6 +75,8 @@ graph TD
 ```
 
 ## Knowledge Graph Structure
+
+![Knowledge Graph Architecture](knowledge-graph-architecture.png)
 
 ```mermaid
 graph TD
@@ -136,3 +144,4 @@ graph TD
     API --> Compute
     Compute --> Storage
     Compute --> Blockchain
+```

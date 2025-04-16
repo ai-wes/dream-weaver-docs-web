@@ -1,7 +1,5 @@
 "use client"; // Keep client directive if needed for hooks/interactivity later, but reading fs requires server
 
-import fs from 'fs/promises';
-import path from 'path';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { notFound } from 'next/navigation';

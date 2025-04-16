@@ -1,11 +1,12 @@
 "use client"; // Keep client directive if needed for hooks/interactivity later, but reading fs requires server
 
-import fs from 'fs/promises';
-import path from 'path';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next'; // For metadata
+import Mermaid from '@/components/Mermaid';
+import { useMemo } from 'react';
+import rehypeRaw from 'rehype-raw';
 
 // Define the expected props passed by Next.js for dynamic routes
 interface DynamicPageProps {
@@ -97,13 +98,31 @@ export default async function DynamicMarkdownPage({ params }: DynamicPageProps) 
   const { section, slug } = params;
   const content = await getMarkdownContent(section, slug);
 
-  // Handle Mermaid diagrams or other specific rendering needs here if necessary
-  // For now, it uses react-markdown with GFM support.
+  // Custom renderer for code blocks
+  const components = {
+    code({ node, inline, className, children, ...props }: any) {
+      const match = /language-(\w+)/.exec(className || '');
+      const codeString = String(children).trim();
+      if (match && match[1] === 'mermaid') {
+        // Render Mermaid diagrams using the Mermaid component
+        return <Mermaid code={codeString} />;
+      }
+      // Default: render code block as usual
+      return (
+        <pre className={className} {...props}>
+          <code>{children}</code>
+        </pre>
+      );
+    },
+  };
 
   return (
-    <article className="prose prose-invert max-w-none dark:prose-invert p-6"> {/* Added padding */}
-      {/* prose classes from @tailwindcss/typography for basic styling */}
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+    <article className="prose prose-invert max-w-none dark:prose-invert p-6">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
+        components={components}
+      >
         {content}
       </ReactMarkdown>
     </article>

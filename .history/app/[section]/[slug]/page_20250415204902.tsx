@@ -1,13 +1,12 @@
 "use client"; // Keep client directive if needed for hooks/interactivity later, but reading fs requires server
 
-import fs from 'fs/promises';
-import path from 'path';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next'; // For metadata
 import Mermaid from '@/components/Mermaid';
 import { useMemo } from 'react';
+import rehypeRaw from 'rehype-raw';
 
 // Define the expected props passed by Next.js for dynamic routes
 interface DynamicPageProps {
@@ -119,7 +118,11 @@ export default async function DynamicMarkdownPage({ params }: DynamicPageProps) 
 
   return (
     <article className="prose prose-invert max-w-none dark:prose-invert p-6">
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
+        components={components}
+      >
         {content}
       </ReactMarkdown>
     </article>

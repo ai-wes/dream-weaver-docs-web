@@ -35,8 +35,8 @@ export function SiteHeaderNew() {
           </nav>
           <div className="flex items-center space-x-2">
             <Button variant="ghost" size="icon" asChild className="text-blue-200 hover:text-white hover:bg-blue-900/30">
-              <Link href="https://github.com" target="_blank" rel="noreferrer">
-                <Github className="h-5 w-5" />
+            <Link href="https://github.com/ai-wes/dream-weaver-docs-web" target="_blank" rel="noreferrer">
+            <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
             </Button>
