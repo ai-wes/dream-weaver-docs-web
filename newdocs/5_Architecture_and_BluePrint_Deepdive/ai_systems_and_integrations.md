@@ -1,5 +1,4 @@
-
-
+<img src="/images/ai-infrastructure.png" alt="AI Infrastructure Architecture" style="display:block;margin:0 auto 2rem auto;max-width:700px;border-radius:16px;box-shadow:0 4px 32px #0008;">
 
 %% Diagram for AI Systems & Integration
 

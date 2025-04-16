@@ -1,3 +1,5 @@
+<img src="/images/ar-infrastructure.png" alt="AR Infrastructure Architecture" style="display:block;margin:0 auto 2rem auto;max-width:700px;border-radius:16px;box-shadow:0 4px 32px #0008;">
+
 AI Background Processing (Continuous):
 
     Scheduler: The schedule library runs in the DreamWeaverEntity's background thread.

@@ -1,3 +1,5 @@
+<img src="/images/blockchain_contracts_charts.png" alt="Blockchain Contracts Architecture" style="display:block;margin:0 auto 2rem auto;max-width:700px;border-radius:16px;box-shadow:0 4px 32px #0008;">
+
 %% Diagram for Blockchain Implementation
 
 ```mermaid
