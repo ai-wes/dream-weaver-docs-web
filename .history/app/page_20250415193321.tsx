@@ -100,19 +100,10 @@ export default function Home() {
                 <Video className="h-6 w-6" /> Demo Video
               </CardTitle>
             </CardHeader>
-            <CardContent className="w-full flex flex-col items-center justify-center">
-              <div className="w-full aspect-video max-w-xl mx-auto rounded-lg overflow-hidden shadow-lg">
-                <iframe
-                  width="560"
-                  height="315"
-                  src="https://www.youtube.com/embed/812N9xc8RcA"
-                  title="DreamWeaver Technical Preview"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="w-full h-full"
-                ></iframe>
-              </div>
+            <CardContent>
+              <p className="text-slate-500 text-center">
+                (Video coming soon)
+              </p>
             </CardContent>
           </Card>
         </div>
