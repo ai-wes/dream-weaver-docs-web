@@ -27,7 +27,7 @@ export function SiteHeaderNew() {
               <Link href="/">Documentation</Link>
             </Button>
             <Button variant="ghost" size="sm" asChild className="text-blue-200 hover:text-white hover:bg-blue-900/30">
-              <Link href="/supporting-materials/whitepaper">Whitepaper</Link>
+              <Link href="https://ai-wes.github.io/dreamweaver-litepaper/">Whitepaper</Link>
             </Button>
             <Button variant="ghost" size="sm" asChild className="text-blue-200 hover:text-white hover:bg-blue-900/30">
               <Link href="/">Contact</Link>
