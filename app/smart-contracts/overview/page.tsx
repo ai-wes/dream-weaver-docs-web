@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import { MDXRemote } from 'next-mdx-remote';
 import { Mermaid } from '@/components/Mermaid'; // Assuming Mermaid component exists
 import { components } from '@/components/mdx-components'; // Assuming shared MDX components
 
