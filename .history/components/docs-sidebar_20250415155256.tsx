@@ -157,31 +157,11 @@ export function DocsSidebar() {
 
         <SidebarSeparator />
 
-        {/* --- 5. Smart Contracts --- */}
-        <Collapsible defaultOpen={isActive("/smart-contracts")} className="group/collapsible">
-           <SidebarGroupLabel asChild>
-             <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
-               5. Smart Contracts
-               <ChevronDown className="chevron-rotate" />
-             </CollapsibleTrigger>
-           </SidebarGroupLabel>
-           <CollapsibleContent>
-             <SidebarGroupContent>
-               <SidebarMenu>
-                 {createMenuItem("/smart-contracts/overview", "Overview")}
-                 {/* Add more contract pages here */}
-               </SidebarMenu>
-             </SidebarGroupContent>
-           </CollapsibleContent>
-         </Collapsible>
-
-        <SidebarSeparator />
-
-        {/* --- 6. Architecture Deepdive --- */}
+        {/* --- 5. Architecture Deepdive --- */}
         <Collapsible defaultOpen={isActive("/architecture")} className="group/collapsible">
           <SidebarGroupLabel asChild>
             <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
-              6. Architecture Deepdive
+              5. Architecture Deepdive
               <ChevronDown className="chevron-rotate" />
             </CollapsibleTrigger>
           </SidebarGroupLabel>
@@ -197,11 +177,11 @@ export function DocsSidebar() {
 
         <SidebarSeparator />
 
-        {/* --- 7. Roadmap & Team --- */}
+        {/* --- 6. Roadmap & Team --- */}
         <Collapsible defaultOpen={isActive("/roadmap")} className="group/collapsible">
           <SidebarGroupLabel asChild>
             <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
-              7. Roadmap & Team
+              6. Roadmap & Team
               <ChevronDown className="chevron-rotate" />
             </CollapsibleTrigger>
           </SidebarGroupLabel>
@@ -217,11 +197,11 @@ export function DocsSidebar() {
 
         <SidebarSeparator />
 
-        {/* --- 8. Appendices --- */}
+        {/* --- 7. Appendices --- */}
         <Collapsible defaultOpen={isActive("/appendices")} className="group/collapsible">
           <SidebarGroupLabel asChild>
             <CollapsibleTrigger className="sidebar-collapsible-trigger text-blue-300">
-              8. Appendices
+              7. Appendices
               <ChevronDown className="chevron-rotate" />
             </CollapsibleTrigger>
           </SidebarGroupLabel>
